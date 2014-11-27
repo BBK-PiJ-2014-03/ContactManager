@@ -1,4 +1,13 @@
 import java.util.concurrent.atomic.*;
+/**
+*
+*   A ContactImpl contains information about a Contact
+*
+*   it stores information about the contact's ID number, name and notes about the contact
+*   Static Class variable IDCounter is an AtomicInteger which gives each contact a unique ID.
+*   
+*/
+
 
 public class ContactImpl implements Contact {
 
@@ -14,6 +23,12 @@ public class ContactImpl implements Contact {
         this.notes = "";
     }
     
+    /**
+    *
+    *   getAtomicIDNum() returns the int result of calling getAndIncrement()
+    *   on the static IDCounter field.
+    *
+    */
     private int getAtomicIDNum() {
         return IDCounter.getAndIncrement();
     }
@@ -45,15 +60,21 @@ public class ContactImpl implements Contact {
     * @return a string with notes about the contact, maybe empty.
     */
     public String getNotes() {
-        return "Hello";
+        return new String(notes);
     }
     
     /**
-    * Add notes about the contact.
     *
-    * @param note the notes to be added
+    *   Initialises a new String with a copy of the notes already held in the object
+    *   adds the argument note to the end of the copied String
+    *   replaces the notes field with noteCopy.
+    *
+    *   @param note the notes to be added
+    *
     */
     public void addNotes(String note) { 
-        
+        String noteCopy = new String(notes);
+        noteCopy += note;
+        notes = noteCopy;
     }
 }
