@@ -4,24 +4,84 @@ import static org.junit.Assert.*;
 
 public class ContactTest {
 
-    Contact contact;
+    ContactImpl contact1;
+    ContactImpl contact2;
+    ContactImpl contact3;
     
     /* @Before
     public void buildContact() {
-        
-    } */
+        contact1 = new ContactImpl("Sam Smith");
+        contact2 = new ContactImpl("Craig Craigson");
+        contact3 = new ContactImpl("James Johnson");
+    }
     
     @Test
     public void testConstructor() {
-        contact = new ContactImpl("Sam Smith");
-        assertEquals(contact.getName(), "Sam Smith");
-        assertEquals(contact.getId(), 0);
-        System.out.println(contact.getName());
-        System.out.println(contact.getId());
+        assertEquals(contact1.getName(), "Sam Smith");
+        assertEquals(contact1.getId(), 6);
+        assertNotNull(contact1);
+        System.out.println(contact1.getIDCounter());
+        System.out.println(contact1);
+        System.out.println(contact2);
+        System.out.println(contact3);
     }
     
-    /* @After
+    @Test
+    public void testMultipleContacts() {
+        assertEquals(contact2.getName(), "Craig Craigson");
+        assertEquals(contact2.getId(), 1);
+        assertNotNull(contact2);
+        
+        assertEquals(contact3.getName(), "James Johnson");
+        assertEquals(contact3.getId(), 2);
+        assertNotNull(contact3);
+        System.out.println(contact1);
+        System.out.println(contact2);
+        System.out.println(contact3);
+    }
+    
+    @Test
+    public void testMoreContacts() {
+        assertEquals(contact2.getName(), "Craig Craigson");
+        assertEquals(contact2.getId(), 4);
+        assertNotNull(contact2);
+        
+        assertEquals(contact3.getName(), "James Johnson");
+        assertEquals(contact3.getId(), 5);
+        assertNotNull(contact3);
+        System.out.println(contact1);
+        System.out.println(contact2);
+        System.out.println(contact3);
+    }
+    
+    @After
     public void cleanContact() {
-        contact = null;
+        contact1 = null;
+        contact2 = null;
+        contact3 = null;
+        System.out.println(contact1);
+        System.out.println(contact2);
+        System.out.println(contact3);
     } */
+    
+    @Before 
+    public void buildContact() {
+        contact1 = new ContactImpl("Sam Smith");
+    }
+    
+    @Test
+    public void testAddNotes() {
+        contact1.addNotes("These are some notes");
+    }
+    
+    @Test
+    public void testGetNotes() {
+        contact1.addNotes("These are some notes");
+        assertEquals(contact1.getNotes(), "These are some notes"); 
+    }
+    
+    @After
+    public void cleanContact() {
+        contact1 = null;
+    }
 }

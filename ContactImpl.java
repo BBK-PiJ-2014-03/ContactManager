@@ -11,7 +11,7 @@ import java.util.concurrent.atomic.*;
 
 public class ContactImpl implements Contact {
 
-    private static AtomicInteger IDCounter = new AtomicInteger(0);
+    public static AtomicInteger IDCounter = new AtomicInteger(0);
     
     private final int IDNUM;
     private final String NAME;
@@ -34,30 +34,30 @@ public class ContactImpl implements Contact {
     }
     
     /**
-    * Returns the ID of the contact.
+    *   Returns the ID of the contact.
     *
-    * @return the ID of the contact.
+    *   @return the ID of the contact.
     */
     public int getId() {
         return new Integer(IDNUM);
     }
     
     /**
-    * Returns the name of the contact.
+    *   Returns the name of the contact.
     *
-    * @return the name of the contact.
+    *   @return the name of the contact.
     */
     public String getName() {
         return new String(NAME);
     }
     
     /**
-    * Returns our notes about the contact, if any.
+    *   Returns our notes about the contact, if any.
     *
-    * If we have not written anything about the contact, the empty
-    * string is returned.
+    *   If we have not written anything about the contact, the empty
+    *   string is returned.
     *
-    * @return a string with notes about the contact, maybe empty.
+    *   @return a string with notes about the contact, maybe empty.
     */
     public String getNotes() {
         return new String(notes);
@@ -77,4 +77,14 @@ public class ContactImpl implements Contact {
         noteCopy += note;
         notes = noteCopy;
     }
+    
+    @Override
+    public String toString() {
+        String result = ("Name; " + NAME + " \nID Number: " + IDNUM + 
+                        " \nNotes about " + NAME + ": " + notes + "\n");
+        return result;
+    }
+        
+    
+    
 }
