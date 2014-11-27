@@ -38,6 +38,7 @@ public class ContactImpl implements Contact {
     *
     *   @return the ID of the contact.
     */
+    @Override
     public int getId() {
         return new Integer(IDNUM);
     }
@@ -47,6 +48,7 @@ public class ContactImpl implements Contact {
     *
     *   @return the name of the contact.
     */
+    @Override
     public String getName() {
         return new String(NAME);
     }
@@ -59,6 +61,7 @@ public class ContactImpl implements Contact {
     *
     *   @return a string with notes about the contact, maybe empty.
     */
+    @Override
     public String getNotes() {
         return new String(notes);
     }
@@ -69,22 +72,28 @@ public class ContactImpl implements Contact {
     *   adds the argument note to the end of the copied String
     *   replaces the notes field with noteCopy.
     *
-    *   @param note the notes to be added
+    *   @param note the notes to be added.
     *
     */
+    @Override
     public void addNotes(String note) { 
         String noteCopy = new String(notes);
         noteCopy += note;
         notes = noteCopy;
     }
     
+    /**
+    *
+    *   toString() method returns a String with details about the state of the
+    *   ContactImpl object.
+    *
+    *   @return String with the ContactImpl object's NAME, IDNUM and the object's notes.
+    *
+    */
     @Override
     public String toString() {
         String result = ("Name; " + NAME + " \nID Number: " + IDNUM + 
                         " \nNotes about " + NAME + ": " + notes + "\n");
         return result;
     }
-        
-    
-    
 }
