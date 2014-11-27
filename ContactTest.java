@@ -4,9 +4,9 @@ import static org.junit.Assert.*;
 
 public class ContactTest {
 
-    ContactImpl contact1;
-    ContactImpl contact2;
-    ContactImpl contact3;
+    Contact contact1;
+    Contact contact2;
+    Contact contact3;
     
     /* @Before
     public void buildContact() {
@@ -20,7 +20,6 @@ public class ContactTest {
         assertEquals(contact1.getName(), "Sam Smith");
         assertEquals(contact1.getId(), 6);
         assertNotNull(contact1);
-        System.out.println(contact1.getIDCounter());
         System.out.println(contact1);
         System.out.println(contact2);
         System.out.println(contact3);
@@ -64,7 +63,7 @@ public class ContactTest {
         System.out.println(contact3);
     } */
     
-    @Before 
+    /* @Before 
     public void buildContact() {
         contact1 = new ContactImpl("Sam Smith");
     }
@@ -78,10 +77,11 @@ public class ContactTest {
     public void testGetNotes() {
         contact1.addNotes("These are some notes");
         assertEquals(contact1.getNotes(), "These are some notes"); 
+        System.out.println(contact1.getNotes());
     }
     
     @After
     public void cleanContact() {
         contact1 = null;
-    }
+    } */
 }
