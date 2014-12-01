@@ -30,6 +30,22 @@ public class MeetingImpl implements Meeting {
     
     /**
     *
+    *   I/O Constructor
+    *   used to re=create MeetingImpl Objects after retrieving data from the I/O file.
+    *
+    *   @param meetingID the ID Number for the meeting
+    *   @param meetingDate the date of the meeting
+    *   @param attendees the Contacts attending the meeting
+    *
+    */
+    public MeetingImpl(int meetingID, Calendar meetingDate, Set<Contact> attendees) {
+        this.meetingID = meetingID;
+        this.meetingDate = meetingDate;
+        this.attendees = attendees;
+    }
+    
+    /**
+    *
     *   getAtomicMeetingID() returns the int result of calling getAndIncrement()
     *   on the static meetingIDCounter field.
     *
@@ -53,7 +69,7 @@ public class MeetingImpl implements Meeting {
     * @return a clone of the meetingDate;
     */
     public Calendar getDate() {
-        return meetingDate.clone();
+        return (Calendar)meetingDate.clone();
     }
     
     /**

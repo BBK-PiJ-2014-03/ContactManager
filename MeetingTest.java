@@ -15,6 +15,8 @@ public class MeetingTest {
     @Test
     public void testMeetingConstructor() {
         assertEquals(meeting.getId(), 0);
+        assertNotNull(meeting.getContacts());
+        assertNotNull(meeting.getDate());
     }
     
     @After
