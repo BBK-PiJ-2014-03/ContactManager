@@ -84,4 +84,14 @@ public class ContactTest {
     public void cleanContact() {
         contact1 = null;
     } */
+    
+    @Test
+    public void testReConstructor() {
+        contact1 = new ContactImpl("Jim Smith", 45, "This is Jim Smith's Contact Info");
+        assertNotNull(contact1);
+        assertEquals(contact1.getName(), "Jim Smith");
+        assertEquals(contact1.getId(), 45);
+        assertEquals(contact1.getNotes(), "This is Jim Smith's Contact Info");
+        System.out.println(contact1);
+    }
 }

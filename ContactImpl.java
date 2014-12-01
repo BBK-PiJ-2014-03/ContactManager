@@ -17,10 +17,36 @@ public class ContactImpl implements Contact {
     private final String NAME;
     private String notes;
     
+    /**
+    *
+    *   Initial constructor
+    *   accepts a String name for the contact's name,
+    *   generates a Unique ID number using the getAtomicIDNum() method
+    *   sets notes to be an empty String.
+    *
+    *   @param the name of the contact.
+    *
+    */
     public ContactImpl(String name) {
         this.NAME = name;
         this.IDNUM = getAtomicIDNum();
         this.notes = "";
+    }
+    
+    /**
+    *
+    *   I/O constructor
+    *   used to re-create Contact objects after retrieving data from the I/O file
+    *
+    *   @param name the name of the Contact
+    *   @param IDNum the contacts IDNUM
+    *   @param notes the stored notes
+    *
+    */
+    public ContactImpl(String name, int IDNum, String notes) {
+        this.NAME = name;
+        this.IDNUM = IDNum;
+        this.notes = notes;
     }
     
     /**
