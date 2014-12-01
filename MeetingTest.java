@@ -1,5 +1,7 @@
 import org.junit.*;
 import static org.junit.Assert.*;
+import java.util.HashSet;
+import java.util.Calendar;
 
 public class MeetingTest {
 
@@ -7,7 +9,7 @@ public class MeetingTest {
     
     @Before
     public void buildMeeting() {
-        meeting = new MeetingImpl();
+        meeting = new MeetingImpl(Calendar.getInstance(), new HashSet<Contact>(10));
     }
     
     @Test
