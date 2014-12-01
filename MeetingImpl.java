@@ -50,11 +50,10 @@ public class MeetingImpl implements Meeting {
     /**
     * Return the date of the meeting.
     *
-    * @return the date of the meeting.
+    * @return a clone of the meetingDate;
     */
     public Calendar getDate() {
-        Calendar newCalendar = Calendar.getInstance();
-        return newCalendar;
+        return meetingDate.clone();
     }
     
     /**
@@ -67,6 +66,6 @@ public class MeetingImpl implements Meeting {
     * @return the details of people that attended the meeting.
     */
     public Set<Contact> getContacts() {
-        return new HashSet<Contact>(10);
+        return new HashSet<Contact>(attendees);
     }
 }
