@@ -122,4 +122,17 @@ public class ContactImpl implements Contact {
                         " \nNotes about " + NAME + ": " + notes + "\n");
         return result;
     }
+    
+    /**
+    *
+    *   Static resumerIDCounter() method accepts an int parameter 
+    *   re-initialises the IDCounter field with the next highest unique IDNumber
+    *
+    *   @param highest integer value previously stored in the Contacts.txt file.
+    *
+    */
+    public static void resumeIDCounter(int highestNumber) {
+        AtomicInteger newCounter = new AtomicInteger(highestNumber);
+        IDCounter = newCounter;
+    }
 }
