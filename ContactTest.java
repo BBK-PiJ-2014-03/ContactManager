@@ -85,7 +85,7 @@ public class ContactTest {
         contact1 = null;
     } */
     
-    @Test
+    /* @Test
     public void testReConstructor() {
         contact1 = new ContactImpl("Jim Smith", 45, "This is Jim Smith's Contact Info");
         assertNotNull(contact1);
@@ -93,5 +93,24 @@ public class ContactTest {
         assertEquals(contact1.getId(), 45);
         assertEquals(contact1.getNotes(), "This is Jim Smith's Contact Info");
         System.out.println(contact1);
+    } */
+    
+    /* @Test
+    public void testResumeIDCounter() {
+        ContactImpl.resumeIDCounter(5);
+        System.out.println(ContactImpl.IDCounter);
+    } */
+    @Test
+    public void testReEnterContacts() {
+        ContactImpl.resumeIDCounter(5);
+        System.out.println(ContactImpl.IDCounter);
+        
+        contact1 = new ContactImpl("Jim Smith");
+        System.out.println(contact1);
+        System.out.println(ContactImpl.IDCounter);
+        contact2 = new ContactImpl("Pete Smithe");
+        System.out.println(contact2);
+        System.out.println(ContactImpl.IDCounter);
+        
     }
 }
