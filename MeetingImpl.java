@@ -59,6 +59,7 @@ public class MeetingImpl implements Meeting {
     *
     * @return the id of the meeting.
     */
+    @Override
     public int getId() {
         return new Integer(meetingID);
     }
@@ -68,6 +69,7 @@ public class MeetingImpl implements Meeting {
     *
     * @return a clone of the meetingDate;
     */
+    @Override
     public Calendar getDate() {
         return (Calendar)meetingDate.clone();
     }
@@ -81,7 +83,21 @@ public class MeetingImpl implements Meeting {
     *
     * @return the details of people that attended the meeting.
     */
+    @Override
     public Set<Contact> getContacts() {
         return new HashSet<Contact>(attendees);
+    }
+    
+    /**
+    *
+    *   Static resumeMeetingIDCounter() method accepts an int parameter 
+    *   re-initialises the meetingIDCounter field with the next highest unique IDNumber
+    *
+    *   @param highest integer value previously stored in the Contacts.txt file.
+    *
+    */
+    public static void resumeMeetingIDCounter(int highestNumber) {
+        AtomicInteger newCounter = new AtomicInteger(highestNumber);
+        meetingIDCounter = newCounter;
     }
 }
