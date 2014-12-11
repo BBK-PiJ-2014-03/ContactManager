@@ -19,10 +19,22 @@ public class PastMeetingTest {
         assertNotNull(pastMeeting);
     } */
     
-    @Test
+    /* @Test
     public void testGetNotes() {
         assertNotNull(pastMeeting.getNotes());
         System.out.println(pastMeeting.getNotes());
+    } */
+    
+    /* @Test
+    public void testGetContacts() {
+        assertNotNull(pastMeeting.getContacts());
+        System.out.println(pastMeeting.getContacts());
+    } */
+    
+    @Test
+    public void testGetDate() {
+        assertNotNull(pastMeeting.getDate());
+        System.out.println(pastMeeting.getDate().getTime());
     }
     
     @After
