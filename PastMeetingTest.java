@@ -31,10 +31,16 @@ public class PastMeetingTest {
         System.out.println(pastMeeting.getContacts());
     } */
     
-    @Test
+    /* @Test
     public void testGetDate() {
         assertNotNull(pastMeeting.getDate());
         System.out.println(pastMeeting.getDate().getTime());
+    } */
+    
+    @Test
+    public void testGetId() {
+        assertNotNull(pastMeeting.getId());
+        System.out.println(pastMeeting.getId());
     }
     
     @After
