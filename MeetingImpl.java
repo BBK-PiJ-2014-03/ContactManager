@@ -3,6 +3,14 @@ import java.util.Set;
 import java.util.concurrent.atomic.*;
 import java.util.HashSet;
 
+/**
+*
+*   A class implementing the Meeting Interface
+*
+*   MeetingImpl holds information about the ID number of a Meeting
+*   the date of the Meeting and the Set of Contacts attending the Meeting
+*
+*/
 public class MeetingImpl implements Meeting {
     
     public static AtomicInteger meetingIDCounter = new AtomicInteger(0);
