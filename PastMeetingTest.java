@@ -14,9 +14,15 @@ public class PastMeetingTest {
         pastMeeting = new PastMeetingImpl("These are notes about a previous meeting", meeting);
     }
     
-    @Test
+   /*  @Test
     public void testConstructor() {
         assertNotNull(pastMeeting);
+    } */
+    
+    @Test
+    public void testGetNotes() {
+        assertNotNull(pastMeeting.getNotes());
+        System.out.println(pastMeeting.getNotes());
     }
     
     @After
