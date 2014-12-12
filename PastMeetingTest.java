@@ -5,8 +5,8 @@ import java.util.Calendar;
 
 public class PastMeetingTest {
     
-    MeetingImpl meeting;
-    PastMeetingImpl pastMeeting;
+    Meeting meeting;
+    PastMeeting pastMeeting;
     
     @Before
     public void buildPastMeeting() {
@@ -25,11 +25,11 @@ public class PastMeetingTest {
         System.out.println(pastMeeting.getNotes());
     } */
     
-    /* @Test
+    @Test
     public void testGetContacts() {
         assertNotNull(pastMeeting.getContacts());
         System.out.println(pastMeeting.getContacts());
-    } */
+    }
     
     /* @Test
     public void testGetDate() {
@@ -37,11 +37,11 @@ public class PastMeetingTest {
         System.out.println(pastMeeting.getDate().getTime());
     } */
     
-    @Test
+   /*  @Test
     public void testGetId() {
         assertNotNull(pastMeeting.getId());
         System.out.println(pastMeeting.getId());
-    }
+    } */
     
     @After
     public void cleanPastMeeting() {

@@ -11,7 +11,7 @@ import java.util.concurrent.atomic.*;
 
 public class ContactImpl implements Contact {
 
-    public static AtomicInteger IDCounter = new AtomicInteger(0);
+    private static AtomicInteger IDCounter = new AtomicInteger(0);
     
     private final int IDNUM;
     private final String NAME;

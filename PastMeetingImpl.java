@@ -12,9 +12,9 @@ import java.util.Calendar;
 public class PastMeetingImpl implements PastMeeting {
     
     private String notes;
-    private MeetingImpl meeting;
+    private Meeting meeting;
     
-    public PastMeetingImpl(String notes, MeetingImpl meeting) {
+    public PastMeetingImpl(String notes, Meeting meeting) {
         this.notes = notes;
         this.meeting = meeting;
     }
