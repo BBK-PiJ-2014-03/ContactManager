@@ -7,7 +7,7 @@ public class MeetingTest {
 
     Meeting meeting;
     
-    /* @Before
+    @Before
     public void buildMeeting() {
         meeting = new MeetingImpl(Calendar.getInstance(), new HashSet<Contact>(10));
     }
@@ -22,11 +22,11 @@ public class MeetingTest {
     @After
     public void cleanMeeting() {
         meeting = null;
-    } */
+    }
     
-    @Test
+   /*  @Test
     public void testResumeMeetingIDCounter() {
         MeetingImpl.resumeMeetingIDCounter(5);
         System.out.println(MeetingImpl.meetingIDCounter);
-    }
+    } */
 }
