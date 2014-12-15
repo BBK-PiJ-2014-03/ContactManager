@@ -2,6 +2,7 @@ import java.util.Calendar;
 import java.util.Set;
 import java.util.concurrent.atomic.*;
 import java.util.HashSet;
+import java.util.GregorianCalendar;
 
 /**
 *
@@ -31,8 +32,8 @@ public class MeetingImpl implements Meeting {
     *
     */
     public MeetingImpl(Calendar meetingDate, Set<Contact> attendees) {
-        this.meetingDate = meetingDate;
-        this.attendees = attendees;
+        this.meetingDate = (GregorianCalendar)meetingDate.clone();
+        this.attendees = new HashSet<Contact>(attendees);
         this.meetingID = getAtomicMeetingID();
     }
     
@@ -48,8 +49,8 @@ public class MeetingImpl implements Meeting {
     */
     public MeetingImpl(int meetingID, Calendar meetingDate, Set<Contact> attendees) {
         this.meetingID = meetingID;
-        this.meetingDate = meetingDate;
-        this.attendees = attendees;
+        this.meetingDate = (GregorianCalendar)meetingDate.clone();
+        this.attendees = new HashSet<Contact>(attendees);
     }
     
     /**
