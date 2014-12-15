@@ -28,7 +28,7 @@ public class ContactImpl implements Contact {
     *
     */
     public ContactImpl(String name) {
-        this.NAME = name;
+        this.NAME = new String(name);
         this.IDNUM = getAtomicIDNum();
         this.notes = "";
     }
@@ -44,9 +44,9 @@ public class ContactImpl implements Contact {
     *
     */
     public ContactImpl(String name, int IDNum, String notes) {
-        this.NAME = name;
+        this.NAME = new String(name);
         this.IDNUM = IDNum;
-        this.notes = notes;
+        this.notes = new String(notes);
     }
     
     /**
