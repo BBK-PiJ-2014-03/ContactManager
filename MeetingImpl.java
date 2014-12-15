@@ -14,7 +14,7 @@ import java.util.GregorianCalendar;
 */
 public class MeetingImpl implements Meeting {
     
-    public static AtomicInteger meetingIDCounter = new AtomicInteger(0);
+    private static AtomicInteger meetingIDCounter = new AtomicInteger(0);
     
     private int meetingID;
     private Calendar meetingDate;
