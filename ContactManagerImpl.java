@@ -4,6 +4,62 @@ import java.util.Set;
 
 public class ContactManagerImpl implements ContactManager {
 
-    
+    private File file;
 
+    public ContactManagerImpl() {
+        file = new File("Contacts");
+    }
+    
+    public int addFutureMeeting(Set<Contact> contacts, Calendar date) {
+        
+    }
+
+    public PastMeeting getPastMeeting(int id) {
+        
+    }
+    
+    public FutureMeeting getFutureMeeting(int id) {
+        
+    }
+    
+    public Meeting getMeeting(int id) {
+        
+    }
+    
+    public List<Meeting> getFutureMeetingList(Contact contact) {
+        
+    }
+    
+    public List<Meeting> getFutureMeetingList(Calendar date) {
+        
+    }
+    
+    public List<PastMeeting> getPastMeetingList(Contact contact) {
+        
+    }
+    
+    public void addNewPastMeeting(Set<Contact> contacts, Calendar date, String text) {
+        
+    }
+
+    public void addMeetingNotes(int id, String text) {
+        
+    }
+    
+    public void addNewContact(String name, String notes) {
+        
+    }
+    
+    public Set<Contact> getContacts(int... ids) {
+        
+    }
+    
+    public Set<Contact> getContacts(String name) {
+        
+    }
+    
+    public void flush() {
+        
+    }
+    
 }
