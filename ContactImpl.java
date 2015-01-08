@@ -1,3 +1,4 @@
+import java.io.Serializable;
 import java.util.concurrent.atomic.*;
 /**
 *
@@ -9,7 +10,8 @@ import java.util.concurrent.atomic.*;
 */
 
 
-public class ContactImpl implements Contact {
+public class ContactImpl implements Contact, 
+                                    Serializable {
 
     private static AtomicInteger IDCounter = new AtomicInteger(0);
     
@@ -31,22 +33,6 @@ public class ContactImpl implements Contact {
         this.NAME = new String(name);
         this.IDNUM = getAtomicIDNum();
         this.notes = "";
-    }
-    
-    /**
-    *
-    *   I/O constructor
-    *   used to re-create Contact objects after retrieving data from the I/O file
-    *
-    *   @param name the name of the Contact
-    *   @param IDNum the contacts IDNUM
-    *   @param notes the stored notes
-    *
-    */
-    public ContactImpl(String name, int IDNum, String notes) {
-        this.NAME = new String(name);
-        this.IDNUM = IDNum;
-        this.notes = new String(notes);
     }
     
     /**
