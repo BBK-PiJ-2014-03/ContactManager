@@ -95,4 +95,15 @@ public class MeetingImpl implements Meeting,
         AtomicInteger newCounter = new AtomicInteger(highestNumber);
         meetingIDCounter = newCounter;
     }
+    
+     /**
+    *
+    *   method for accessing the current value of the IDCounter
+    *
+    *   @return the current value of the IDCounter
+    *
+    */
+    public static int getMeetingIDCounter() {
+        return (Integer) meetingIDCounter.get();
+    }
 }
