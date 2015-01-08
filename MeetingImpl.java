@@ -3,6 +3,7 @@ import java.util.Set;
 import java.util.concurrent.atomic.*;
 import java.util.HashSet;
 import java.util.GregorianCalendar;
+import java.io.Serializable;
 
 /**
 *
@@ -12,7 +13,8 @@ import java.util.GregorianCalendar;
 *   the date of the Meeting and the Set of Contacts attending the Meeting
 *
 */
-public class MeetingImpl implements Meeting {
+public class MeetingImpl implements Meeting,
+                                    Serializable {
     
     private static AtomicInteger meetingIDCounter = new AtomicInteger(0);
     
@@ -35,22 +37,6 @@ public class MeetingImpl implements Meeting {
         this.meetingDate = (GregorianCalendar)meetingDate.clone();
         this.attendees = new HashSet<Contact>(attendees);
         this.meetingID = getAtomicMeetingID();
-    }
-    
-    /**
-    *
-    *   I/O Constructor
-    *   used to re=create MeetingImpl Objects after retrieving data from the I/O file.
-    *
-    *   @param meetingID the ID Number for the meeting
-    *   @param meetingDate the date of the meeting
-    *   @param attendees the Contacts attending the meeting
-    *
-    */
-    public MeetingImpl(int meetingID, Calendar meetingDate, Set<Contact> attendees) {
-        this.meetingID = meetingID;
-        this.meetingDate = (GregorianCalendar)meetingDate.clone();
-        this.attendees = new HashSet<Contact>(attendees);
     }
     
     /**
