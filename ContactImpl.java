@@ -121,4 +121,15 @@ public class ContactImpl implements Contact,
         AtomicInteger newCounter = new AtomicInteger(highestNumber);
         IDCounter = newCounter;
     }
+    
+    /**
+    *
+    *   method for accessing the current value of the IDCounter
+    *
+    *   @return the current value of the IDCounter
+    *
+    */
+    public static int getIDCounter() {
+        return (Integer) IDCounter.get();
+    }
 }
