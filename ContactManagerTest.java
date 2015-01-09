@@ -39,6 +39,7 @@ public class ContactManagerTest {
         cm.addNewPastMeeting(contactSet, pastDate, "Past Meeting 2");
         cm.addNewPastMeeting(contactSet, pastDate, "Past Meeting 3");
         
+        cm.addFutureMeeting(contactSet, futureDate);
     }
     
     @After
@@ -91,6 +92,11 @@ public class ContactManagerTest {
     public void testGetPastMeeting() {
         assertEquals(cm.getPastMeeting(0).getId(), 0);
         assertEquals(cm.getPastMeeting(1).getId(), 1);
+    }
+    
+    @Test
+    public void testGetFutureMeeting() {
+        assertEquals(cm.getFutureMeeting(0).getId(), 0);
     }
     
     @Test

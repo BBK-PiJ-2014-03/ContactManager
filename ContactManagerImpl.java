@@ -13,6 +13,7 @@ import java.io.FileNotFoundException;
 import java.lang.NullPointerException;
 import java.lang.IllegalArgumentException;
 import java.io.PrintWriter;
+import java.util.Iterator;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
@@ -101,16 +102,75 @@ public class ContactManagerImpl implements ContactManager {
     *         of if any contact is unknown / non-existent
     */
     public int addFutureMeeting(Set<Contact> contacts, Calendar date) {
-        Iterator<Contact> contactIterator = contacts.iterator();
         
+        if (date.before(GregorianCalendar.getInstance())) {
+            throw new IllegalArgumentException("Meeting is set for a time in the past.");
+        }
+        
+        boolean contactExists = false;
+        Iterator<Contact> contactIterator = contacts.iterator();
+        while (contactIterator.hasNext()) {
+            Contact newContact = contactIterator.next();
+            for (Contact c : contactList) {
+                if (newContact.equals(c)) {
+                    contactExists = true;
+                }
+            }
+        }
+        if (contactExists) {
+            throw new IllegalArgumentException("Contact is unknown / non-existent.");
+        }
+        else {
+            Meeting newMeeting = new MeetingImpl(date, contacts);
+            meetingList.add(newMeeting);
+            return newMeeting.getId();
+        }
     }
 
+    /**
+    * Returns the PAST meeting with the requested ID, or null if it there is none.
+    *
+    * @param id the ID for the meeting
+    * @return the meeting with the requested ID, or null if it there is none.
+    * @throws IllegalArgumentException if there is a meeting with that ID happening in the future
+    */
     public PastMeeting getPastMeeting(int id) {
-        return null;
+        PastMeeting newPastMeeting = null;
+        
+        for (Meeting m : meetingList) {
+            if (m.getId() == id) {
+                throw new IllegalArgumentException("The meeting with ID: " + id + " is happening in the future.");
+            }
+        }
+        for (Meeting m : pastMeetingList) {
+            if (m.getId() == id) {
+                newPastMeeting = (PastMeetingImpl)m;
+            }
+        }
+        return newPastMeeting;
     }
     
+     /**
+    * Returns the FUTURE meeting with the requested ID, or null if there is none.
+    *
+    * @param id the ID for the meeting
+    * @return the meeting with the requested ID, or null if it there is none.
+    * @throws IllegalArgumentException if there is a meeting with that ID happening in the past
+    */
     public FutureMeeting getFutureMeeting(int id) {
-        return null;
+        FutureMeeting futureMeeting = null;
+        
+        for (Meeting m : pastMeetingList) {
+            if (m.getId() == id) {
+                throw new IllegalArgumentException("The meeting with ID: " + id + " is happening in the past.");
+            }
+        }
+        for (Meeting m : meetingList) {
+            if (m.getId() == id) {
+                futureMeeting = (FutureMeeting)m;
+            }
+        }
+        return futureMeeting;
     }
     
     public Meeting getMeeting(int id) {
