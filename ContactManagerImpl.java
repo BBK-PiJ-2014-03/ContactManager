@@ -11,6 +11,7 @@ import java.io.ObjectOutputStream;
 import java.io.IOException;
 import java.io.FileNotFoundException;
 import java.lang.NullPointerException;
+import java.lang.IllegalArgumentException;
 import java.io.PrintWriter;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -74,6 +75,21 @@ public class ContactManagerImpl implements ContactManager {
         }
             
     }
+    /**
+    *
+    *   private method for updating the meeting lists
+    *   used on construction of a ContactManagerImpl object to put meetings that have already happened
+    *   into the pastMeetingList.
+    *
+    */
+    /* private void updateMeetingLists() {
+        for (Meeting m : meetingList) {
+            if (m.getDate().before(GregorianCalendar.getInstance())) {
+                this.addNewPastMeeting(m.getContacts(), m.getDate(),
+                meetingList.remove(m);
+            }
+        }
+    } */
     
     public int addFutureMeeting(Set<Contact> contacts, Calendar date) {
         return 0;
@@ -103,8 +119,30 @@ public class ContactManagerImpl implements ContactManager {
         return null;
     }
     
+    /**
+    * Create a new record for a meeting that took place in the past.
+    *
+    * @param contacts a list of participants
+    * @param date the date on which the meeting took place
+    * @param text messages to be added about the meeting.
+    * @throws IllegalArgumentException if the list of contacts is
+    * empty, or any of the contacts does not exist. Or if the date supplied is not in the past
+    * @throws NullPointerException if any of the arguments is null
+    */
     public void addNewPastMeeting(Set<Contact> contacts, Calendar date, String text) {
-        
+        if (contacts == null || date == null || text == null) {
+            throw new NullPointerException("One or more of the parameters is null.");
+        }
+        if (contacts.isEmpty()) { 
+            throw new IllegalArgumentException("List of Contacts is empty");
+        }
+        if (date.after(GregorianCalendar.getInstance())) {
+            throw new IllegalArgumentException("Date supplied is not in the past.");
+        }
+        else {
+            PastMeeting pastMeeting = new PastMeetingImpl(date, contacts, text);
+            pastMeetingList.add(pastMeeting);
+        }
     }
 
     public void addMeetingNotes(int id, String text) {
@@ -138,7 +176,11 @@ public class ContactManagerImpl implements ContactManager {
     *   and writing the new data to the file.
     *
     *   If statement tests to see if the file exists and is a File object
-    *   links the file to a new PrintWriter
+    *   links the file to a new PrintWriter.
+    *
+    *   Code inside the try block creates a FileOutputStream/ ObjectOutputStream combo
+    *   and writes the Contact IDCounter, MeetingIDCounter, contactList, meetingList and pastMeetingList
+    *   Objects to the "Contacts.txt" file, in the same order as they are written.
     *
     */
     public void flush() {
