@@ -2,7 +2,10 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.Set;
 import org.junit.*;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import static org.junit.Assert.*;
+
 
 public class ContactManagerTest {
     
@@ -21,6 +24,7 @@ public class ContactManagerTest {
     @Test
     public void testConstructor() {
         assertNotNull(cm);
+        System.out.println(GregorianCalendar.getInstance());
     }
     
     @Test
@@ -35,6 +39,16 @@ public class ContactManagerTest {
         String name2 = "Reginald Jeeves";
         String notes2 = "Gentleman's Gentleman";
         cm.addNewContact(name2, notes2);
+    }
+    
+    @Test
+    public void testCalendar() {
+        Calendar futureDate = new GregorianCalendar(2015, 03, 20);
+        Calendar pastDate = new GregorianCalendar(2014, 01, 4);
+        Calendar current = new GregorianCalendar(2015, 01, 8);
+        
+        assertTrue(futureDate.after(current));
+        assertTrue(pastDate.before(current));
     }
     
     @Test
