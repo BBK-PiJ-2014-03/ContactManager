@@ -91,8 +91,18 @@ public class ContactManagerImpl implements ContactManager {
         }
     } */
     
+    /**
+    * Add a new meeting to be held in the future.
+    *
+    * @param contacts a list of contacts that will participate in the meeting
+    * @param date the date on which the meeting will take place
+    * @return the ID for the meeting
+    * @throws IllegalArgumentException if the meeting is set for a time in the past,
+    *         of if any contact is unknown / non-existent
+    */
     public int addFutureMeeting(Set<Contact> contacts, Calendar date) {
-        return 0;
+        Iterator<Contact> contactIterator = contacts.iterator();
+        
     }
 
     public PastMeeting getPastMeeting(int id) {
@@ -145,10 +155,55 @@ public class ContactManagerImpl implements ContactManager {
         }
     }
 
+    /**
+    * Add notes to a meeting.
+    *
+    * This method is used when a future meeting takes place, and is
+    * then converted to a past meeting (with notes).
+    *
+    * It can be also used to add notes to a past meeting at a later date.
+    *
+    * @param id the ID of the meeting
+    * @param text messages to be added about the meeting.
+    * @throws IllegalArgumentException if the meeting does not exist
+    * @throws IllegalStateException if the meeting is set for a date in the future
+    * @throws NullPointerException if the notes are null
+    */
     public void addMeetingNotes(int id, String text) {
         
+        Meeting newMeeting = null;
+        ArrayList<Meeting> newMeetingList = new ArrayList<Meeting>();
+        for (Meeting m : meetingList) {
+            if (m.getId() != id) {
+                newMeetingList.add(m);
+            }
+            else if (m.getId() == id) {
+                newMeeting = m;
+            }
+        }
+        if (newMeeting == null) {
+            throw new IllegalArgumentException("Meeting does not exist.");
+        }
+        if (newMeeting.getDate().after(GregorianCalendar.getInstance())) {
+            throw new IllegalStateException("Meeting is set for a date in the future.");
+        }
+        if (text == null) {
+            throw new NullPointerException("No notes to be added.");
+        }
+        else {
+            PastMeeting pastMeeting = new PastMeetingImpl(newMeeting.getDate(), newMeeting.getContacts(), text);
+            pastMeetingList.add(pastMeeting);
+            meetingList = newMeetingList;
+        }
     }
     
+    /**
+    * Create a new contact with the specified name and notes.
+    *
+    * @param name the name of the contact.
+    * @param notes notes to be added about the contact.
+    * @throws NullPointerException if the name or the notes are null
+    */
     public void addNewContact(String name, String notes) {
         
         if (name == null || notes == null) {
@@ -207,7 +262,5 @@ public class ContactManagerImpl implements ContactManager {
         } catch (IOException ex) {
             ex.printStackTrace();
         }
-        
     }
-    
 }
