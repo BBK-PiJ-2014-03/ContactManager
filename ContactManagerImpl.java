@@ -12,7 +12,6 @@ import java.io.IOException;
 import java.io.FileNotFoundException;
 import java.lang.NullPointerException;
 import java.lang.IllegalArgumentException;
-import java.io.PrintWriter;
 import java.util.Iterator;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -175,8 +174,26 @@ public class ContactManagerImpl implements ContactManager {
         return futureMeeting;
     }
     
+    /**
+    * Returns the meeting with the requested ID, or null if it there is none.
+    *
+    * @param id the ID for the meeting
+    * @return the meeting with the requested ID, or null if it there is none.
+    */
     public Meeting getMeeting(int id) {
-        return null;
+        Meeting newMeeting = null;
+        
+        for (Meeting m : meetingList) {
+            if (m.getId() == id) {
+                newMeeting = m;
+            }
+        }
+        for (Meeting m : pastMeetingList) {
+            if (m.getId() == id) {
+                newMeeting = m;
+            }
+        }
+        return newMeeting;
     }
     
     public List<Meeting> getFutureMeetingList(Contact contact) {
