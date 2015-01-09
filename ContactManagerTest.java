@@ -13,18 +13,32 @@ public class ContactManagerTest {
         cm = new ContactManagerImpl();
     }
     
+    @After
+    public void cleanContactManager() {
+        cm = null;
+    }
+    
     @Test
     public void testConstructor() {
         assertNotNull(cm);
     }
     
     @Test
-    public void testFlush() {
-        cm.flush();
+    public void testAddNewContact() {
+        String name1 = "Bertram Wooster";
+        String notes1 = "Gentleman";
+        cm.addNewContact(name1, notes1);
     }
     
-    @After
-    public void cleanContactManager() {
-        cm = null;
+    @Test
+    public void testAddAnotherContact() {
+        String name2 = "Reginald Jeeves";
+        String notes2 = "Gentleman's Gentleman";
+        cm.addNewContact(name2, notes2);
+    }
+    
+    @Test
+    public void testFlush() {
+        cm.flush();
     }
 }

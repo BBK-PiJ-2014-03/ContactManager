@@ -10,6 +10,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.IOException;
 import java.io.FileNotFoundException;
+import java.lang.NullPointerException;
 import java.io.PrintWriter;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -111,6 +112,15 @@ public class ContactManagerImpl implements ContactManager {
     }
     
     public void addNewContact(String name, String notes) {
+        
+        if (name == null || notes == null) {
+            throw new NullPointerException("Name and notes are Null values");
+        }
+        else {
+            Contact newContact = new ContactImpl(name);
+            newContact.addNotes(notes);
+            contactList.add(newContact);
+        }
         
     }
     
