@@ -58,6 +58,12 @@ public class ContactManagerTest {
         Calendar cal = new GregorianCalendar(2014, 3, 9);
         cm.addNewPastMeeting(contactSet, cal, "This is a past meeting");
     }
+    
+    @Test
+    public void testAddMeetingNotes() {
+        cm.addMeetingNotes(0, "Meeting Notes");
+        assertEquals(cm.getPastMeeting(0).getNotes(), "MeetingNotes");
+    }
         
     
     @Test
