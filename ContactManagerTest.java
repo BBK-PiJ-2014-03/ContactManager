@@ -11,10 +11,34 @@ import static org.junit.Assert.*;
 public class ContactManagerTest {
     
     ContactManager cm;
+    Contact c1;
+    Contact c2;
+    Contact c3;
+    Set<Contact> contactSet;
+    Calendar pastDate;
+    Calendar futureDate;
+    
 
     @Before
     public void buildContactManager() {
         cm = new ContactManagerImpl();
+        
+        c1 = new ContactImpl("Bertram Wooster");
+        c2 = new ContactImpl("Reginald Jeeves");
+        c3 = new ContactImpl("Jim Smith");
+        
+        contactSet = new HashSet<Contact>();
+        contactSet.add(c1);
+        contactSet.add(c2);
+        contactSet.add(c3);
+        
+        pastDate = new GregorianCalendar(2014, 3, 4);
+        futureDate = new GregorianCalendar(2016, 2, 6);
+        
+        cm.addNewPastMeeting(contactSet, pastDate, "");
+        cm.addNewPastMeeting(contactSet, pastDate, "Past Meeting 2");
+        cm.addNewPastMeeting(contactSet, pastDate, "Past Meeting 3");
+        
     }
     
     @After
@@ -43,37 +67,31 @@ public class ContactManagerTest {
     
     @Test
     public void testCalendar() {
-        Calendar futureDate = new GregorianCalendar(2015, 03, 20);
-        Calendar pastDate = new GregorianCalendar(2014, 01, 4);
-        
         assertTrue(futureDate.after(Calendar.getInstance()));
         assertTrue(pastDate.before(GregorianCalendar.getInstance()));
     }
     
     @Test
     public void testAddNewPastMeeting() {
-        Contact c1 = new ContactImpl("Jim Smith");
-        Set<Contact> contactSet = new HashSet<Contact>();
-        contactSet.add(c1);
-        Calendar cal = new GregorianCalendar(2014, 3, 9);
-        cm.addNewPastMeeting(contactSet, cal, "This is a past meeting");
+        cm.addNewPastMeeting(contactSet, pastDate, "This is a past meeting");
     }
     
-    @Test
+    /* @Test
     public void testAddMeetingNotes() {
         cm.addMeetingNotes(0, "Meeting Notes");
         assertEquals(cm.getPastMeeting(0).getNotes(), "MeetingNotes");
-    }
+    } */
     
-    @Test
+    /* @Test
     public void testAddFutureMeeting() {
-        Contact c1 = new ContactImpl("Jim Smith");
-        Set<Contact> contactSet = new HashSet<Contact>();
-        contactSet.add(c1);
-        Calendar cal = new GregorianCalendar(2015, 3, 9);
-        assertEquals(cm.addFutureMeeting(contactSet, cal), cm.getFutureMeeting(0).getId());
-    }
+        assertEquals(cm.addFutureMeeting(contactSet, futureDate), cm.getFutureMeeting(0).getId());
+    } */
         
+    @Test
+    public void testGetPastMeeting() {
+        assertEquals(cm.getPastMeeting(0).getId(), 0);
+        assertEquals(cm.getPastMeeting(1).getId(), 1);
+    }
     
     @Test
     public void testFlush() {
