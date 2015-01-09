@@ -1,6 +1,7 @@
 import java.util.Calendar;
 import java.util.List;
 import java.util.Set;
+import java.util.HashSet;
 import org.junit.*;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -24,7 +25,6 @@ public class ContactManagerTest {
     @Test
     public void testConstructor() {
         assertNotNull(cm);
-        System.out.println(GregorianCalendar.getInstance());
     }
     
     @Test
@@ -49,6 +49,16 @@ public class ContactManagerTest {
         assertTrue(futureDate.after(Calendar.getInstance()));
         assertTrue(pastDate.before(GregorianCalendar.getInstance()));
     }
+    
+    @Test
+    public void testAddNewPastMeeting() {
+        Contact c1 = new ContactImpl("Jim Smith");
+        Set<Contact> contactSet = new HashSet<Contact>();
+        contactSet.add(c1);
+        Calendar cal = new GregorianCalendar(2014, 3, 9);
+        cm.addNewPastMeeting(contactSet, cal, "This is a past meeting");
+    }
+        
     
     @Test
     public void testFlush() {
