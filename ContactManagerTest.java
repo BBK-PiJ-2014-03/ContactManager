@@ -45,10 +45,9 @@ public class ContactManagerTest {
     public void testCalendar() {
         Calendar futureDate = new GregorianCalendar(2015, 03, 20);
         Calendar pastDate = new GregorianCalendar(2014, 01, 4);
-        Calendar current = new GregorianCalendar(2015, 01, 8);
         
-        assertTrue(futureDate.after(current));
-        assertTrue(pastDate.before(current));
+        assertTrue(futureDate.after(Calendar.getInstance()));
+        assertTrue(pastDate.before(GregorianCalendar.getInstance()));
     }
     
     @Test
