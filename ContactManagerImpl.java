@@ -68,6 +68,8 @@ public class ContactManagerImpl implements ContactManager {
                 this.contactList = (ArrayList<Contact>) objectStream.readObject();
                 this.meetingList = (ArrayList<Meeting>) objectStream.readObject();
                 this.pastMeetingList = (ArrayList<PastMeeting>) objectStream.readObject();
+                fileStream.close();
+                objectStream.close();
             } catch (IOException ex) {
                 ex.printStackTrace();
             } catch (ClassNotFoundException ex) {
@@ -144,7 +146,7 @@ public class ContactManagerImpl implements ContactManager {
         }
         for (Meeting m : pastMeetingList) {
             if (m.getId() == id) {
-                newPastMeeting = (PastMeetingImpl)m;
+                newPastMeeting = (PastMeeting)m;
             }
         }
         return newPastMeeting;
@@ -290,8 +292,7 @@ public class ContactManagerImpl implements ContactManager {
     *   Flush method for wiping the contents of the "Contacts.txt" file
     *   and writing the new data to the file.
     *
-    *   If statement tests to see if the file exists and is a File object
-    *   links the file to a new PrintWriter.
+    *   File file object is now simply deleted and re-created instead of over-written
     *
     *   Code inside the try block creates a FileOutputStream/ ObjectOutputStream combo
     *   and writes the Contact IDCounter, MeetingIDCounter, contactList, meetingList and pastMeetingList
@@ -302,13 +303,7 @@ public class ContactManagerImpl implements ContactManager {
         File file = new File("Contacts.txt");
         
         if (file.exists() && file.isFile()) {
-            try {
-                PrintWriter printWriter = new PrintWriter(file);
-                printWriter.print("");
-                printWriter.close();
-            } catch (FileNotFoundException ex) {
-                ex.printStackTrace();
-            }
+            file.delete();
         }
         
         try {
@@ -319,6 +314,8 @@ public class ContactManagerImpl implements ContactManager {
             objectOutputStream.writeObject(contactList);
             objectOutputStream.writeObject(meetingList);
             objectOutputStream.writeObject(pastMeetingList);
+            fileOutputStream.close();
+            objectOutputStream.close();
         } catch (IOException ex) {
             ex.printStackTrace();
         }

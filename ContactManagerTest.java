@@ -44,6 +44,7 @@ public class ContactManagerTest {
     
     @After
     public void cleanContactManager() {
+        cm.flush();
         cm = null;
     }
     
@@ -96,7 +97,7 @@ public class ContactManagerTest {
     
     @Test
     public void testGetFutureMeeting() {
-        assertEquals(cm.getFutureMeeting(0).getId(), 0);
+        assertEquals(cm.getFutureMeeting(3).getId(), 3);
     }
     
     @Test
