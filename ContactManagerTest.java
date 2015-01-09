@@ -64,6 +64,15 @@ public class ContactManagerTest {
         cm.addMeetingNotes(0, "Meeting Notes");
         assertEquals(cm.getPastMeeting(0).getNotes(), "MeetingNotes");
     }
+    
+    @Test
+    public void testAddFutureMeeting() {
+        Contact c1 = new ContactImpl("Jim Smith");
+        Set<Contact> contactSet = new HashSet<Contact>();
+        contactSet.add(c1);
+        Calendar cal = new GregorianCalendar(2015, 3, 9);
+        assertEquals(cm.addFutureMeeting(contactSet, cal), cm.getFutureMeeting(0).getId());
+    }
         
     
     @Test
