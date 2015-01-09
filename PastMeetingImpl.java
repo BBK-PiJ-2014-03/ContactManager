@@ -13,7 +13,6 @@ import java.util.GregorianCalendar;
 public class PastMeetingImpl extends MeetingImpl implements PastMeeting {
     
     private String notes;
-    private Meeting meeting;
     
     public PastMeetingImpl(Calendar calendar, Set<Contact> contacts, String notes) {
         super((GregorianCalendar)calendar, contacts);
