@@ -95,9 +95,16 @@ public class ContactManagerTest {
         assertEquals(cm.getPastMeeting(1).getId(), 1);
     }
     
-    @Test
+    /* @Test
     public void testGetFutureMeeting() {
         assertEquals(cm.getFutureMeeting(3).getId(), 3);
+    } */
+    
+    @Test
+    public void testGetMeeting() {
+        assertEquals(cm.getMeeting(0).getId(), 0);
+        assertEquals(cm.getMeeting(1).getId(), 1);
+        assertEquals(cm.getMeeting(3).getId(), 3);
     }
     
     @Test
