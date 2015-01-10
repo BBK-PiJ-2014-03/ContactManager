@@ -4,6 +4,7 @@ import java.util.concurrent.atomic.*;
 import java.util.HashSet;
 import java.util.GregorianCalendar;
 import java.io.Serializable;
+import java.util.Comparator;
 
 /**
 *
@@ -14,7 +15,8 @@ import java.io.Serializable;
 *
 */
 public class MeetingImpl implements Meeting,
-                                    Serializable {
+                                    Serializable,
+                                    Comparator<Meeting> {
     
     private static AtomicInteger meetingIDCounter = new AtomicInteger(0);
     
@@ -105,5 +107,28 @@ public class MeetingImpl implements Meeting,
     */
     public static int getMeetingIDCounter() {
         return (Integer) meetingIDCounter.get();
+    }
+    
+    /**
+    *
+    *   compare method from the Comparator Interface
+    *
+    *   used by the ContactManagerImpl methods for return an ordered list
+    *
+    *   @return a negative integer, zero, or a positive integer as the first argument is less than, equal to, or greater than the second.
+    *
+    */
+    @Override
+    public int compare(Meeting meeting1, Meeting meeting2) {
+        int result = 0;
+        
+        if (meeting1.getDate().before(meeting2.getDate())) {
+            result = -1;
+        }
+        else if (meeting1.getDate().after(meeting2.getDate())) {
+            result = 1;
+        }
+        
+        return result;
     }
 }
