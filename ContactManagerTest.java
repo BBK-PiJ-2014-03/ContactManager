@@ -53,7 +53,7 @@ public class ContactManagerTest {
         assertNotNull(cm);
     }
     
-    @Test
+    /* @Test
     public void testAddNewContact() {
         String name1 = "Bertram Wooster";
         String notes1 = "Gentleman";
@@ -65,7 +65,7 @@ public class ContactManagerTest {
         String name2 = "Reginald Jeeves";
         String notes2 = "Gentleman's Gentleman";
         cm.addNewContact(name2, notes2);
-    }
+    } */
     
     @Test
     public void testCalendar() {
@@ -106,6 +106,13 @@ public class ContactManagerTest {
         assertEquals(cm.getMeeting(1).getId(), 1);
         assertEquals(cm.getMeeting(3).getId(), 3);
     }
+    
+    @Test
+    public void testGetFutureMeetingList() {
+        cm.getFutureMeetingList(c1);
+    }
+    
+    
     
     @Test
     public void testFlush() {
