@@ -1,6 +1,7 @@
 import java.util.Calendar;
 import java.util.List;
 import java.util.Set;
+import java.util.HashSet;
 import java.util.ArrayList;
 import java.io.Serializable;
 import java.io.File;
@@ -12,6 +13,8 @@ import java.io.IOException;
 import java.io.FileNotFoundException;
 import java.lang.NullPointerException;
 import java.lang.IllegalArgumentException;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -196,10 +199,42 @@ public class ContactManagerImpl implements ContactManager {
         return newMeeting;
     }
     
+    /**
+    * Returns the list of future meetings scheduled with this contact.
+    *
+    * If there are none, the returned list will be empty. Otherwise,
+    * the list will be chronologically sorted and will not contain any
+    * duplicates.
+    *
+    * @param contact one of the user’s contacts
+    * @return the list of future meeting(s) scheduled with this contact (maybe empty).
+    * @throws IllegalArgumentException if the contact does not exist
+    */
     public List<Meeting> getFutureMeetingList(Contact contact) {
-        return null;
+        List<Meeting> newMeetingList = new ArrayList<Meeting>();
+        
+        for (Meeting m : meetingList) {
+            if (m.getContacts().contains(contact)) {
+                newMeetingList.add(m);
+            }
+        }
+        
+        Collections.sort(newMeetingList, new MeetingImpl(Calendar.getInstance(), new HashSet<Contact>()));
+        
+        return newMeetingList;
     }
     
+    /**
+    * Returns the list of meetings that are scheduled for, or that took
+    * place on, the specified date
+    *
+    * If there are none, the returned list will be empty. Otherwise,
+    * the list will be chronologically sorted and will not contain any
+    * duplicates.
+    *
+    * @param date the date
+    * @return the list of meetings
+    */
     public List<Meeting> getFutureMeetingList(Calendar date) {
         return null;
     }
