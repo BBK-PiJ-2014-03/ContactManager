@@ -240,23 +240,46 @@ public class ContactManagerImpl implements ContactManager {
         
         if (date.before(Calendar.getInstance())) {
             for (Meeting m : pastMeetingList) {
-                if (m.getDate().get(Calendar.YEAR) == date.get(Calendar.YEAR) &&
-                    m.getDate().get(Calendar.MONTH) == date.get(Calendar.MONTH) &&
-                    m.getDate().get(Calendar.DAY_OF_WEEK) == date.get(Calendar.DAY_OF_WEEK)) {
+                if (compareDate(m.getDate(), date)) {
                         newMeetingList.add(m);
                 }
             }
         }
         else {
             for (Meeting m : meetingList) {
-                if (m.getDate().get(Calendar.YEAR) == date.get(Calendar.YEAR) &&
-                    m.getDate().get(Calendar.MONTH) == date.get(Calendar.MONTH) &&
-                    m.getDate().get(Calendar.DAY_OF_WEEK) == date.get(Calendar.DAY_OF_WEEK)) {
+                if (compareDate(m.getDate(), date)) {
                         newMeetingList.add(m);
                 }
             }
         }
+        
+        Collections.sort(newMeetingList, new MeetingImpl(date, new HashSet<Contact>()));
+        
         return newMeetingList;
+    }
+    
+    /**
+    *
+    *   compareDate method is a re-factoring of the functionality from getFutureMeetingList(Calendar)
+    *
+    *   compares two Calendar objects to see if they represent Calendars of the same date
+    *   extracts the YEAR, MONTH and DAY_OF_WEEK fields to compare only the date value
+    *   and not the time value of a Calendar
+    *
+    *   @param the two Calendar objects to be compared
+    *   @return true if the Calendars represent the same date, false if otherwise
+    *
+    */
+    private boolean compareDate(Calendar date1, Calendar date2) {
+        boolean sameDate = false;
+        
+        if (date1.get(Calendar.YEAR) == date2.get(Calendar.YEAR) &&
+            date1.get(Calendar.MONTH) == date2.get(Calendar.MONTH) &&
+            date1.get(Calendar.DAY_OF_WEEK) == date2.get(Calendar.DAY_OF_WEEK)) {
+            sameDate = true;
+        }
+        
+        return sameDate;
     }
     
     public List<PastMeeting> getPastMeetingList(Contact contact) {
