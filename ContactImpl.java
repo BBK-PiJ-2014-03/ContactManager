@@ -52,7 +52,7 @@ public class ContactImpl implements Contact,
     */
     @Override
     public int getId() {
-        return new Integer(IDNUM);
+        return IDNUM;
     }
     
     /**
@@ -62,7 +62,7 @@ public class ContactImpl implements Contact,
     */
     @Override
     public String getName() {
-        return new String(NAME);
+        return NAME;
     }
     
     /**

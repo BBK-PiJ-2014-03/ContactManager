@@ -123,6 +123,11 @@ public class ContactManagerTest {
     }
     
     @Test
+    public void testGetContacts() {
+        System.out.println(cm.getContacts(1,2));
+    }
+    
+    @Test
     public void testFlush() {
         cm.flush();
     }
