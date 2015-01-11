@@ -219,6 +219,10 @@ public class ContactManagerImpl implements ContactManager {
             }
         }
         
+        if (newMeetingList.isEmpty()) {
+            throw new IllegalArgumentException("The contact does not exist.");
+        }
+        
         Collections.sort(newMeetingList, new MeetingImpl(Calendar.getInstance(), new HashSet<Contact>()));
         
         return newMeetingList;
@@ -282,8 +286,31 @@ public class ContactManagerImpl implements ContactManager {
         return sameDate;
     }
     
+    /**
+    * Returns the list of past meetings in which this contact has participated.
+    *
+    * If there are none, the returned list will be empty. Otherwise,
+    * the list will be chronologically sorted and will not contain any
+    * duplicates.
+    *
+    * @param contact one of the user’s contacts
+    * @return the list of future meeting(s) scheduled with this contact (maybe empty).
+    * @throws IllegalArgumentException if the contact does not exist
+    */
     public List<PastMeeting> getPastMeetingList(Contact contact) {
-        return null;
+        List<PastMeeting> newPastMeetingList = new ArrayList<PastMeeting>();
+        
+        for (Meeting m : pastMeetingList) {
+            if (m.getContacts().contains(contact)) {
+                newPastMeetingList.add((PastMeeting)m);
+            }
+        }
+        
+        if (newPastMeetingList.isEmpty()) {
+            throw new IllegalArgumentException("The contact does not exist.");
+        }
+        
+        return newPastMeetingList;
     }
     
     /**
@@ -374,12 +401,43 @@ public class ContactManagerImpl implements ContactManager {
         
     }
     
+    /**
+    * Returns a list containing the contacts that correspond to the IDs.
+    *
+    * @param ids an arbitrary number of contact IDs
+    * @return a list containing the contacts that correspond to the IDs.
+    * @throws IllegalArgumentException if any of the IDs does not correspond to a real contact
+    */
     public Set<Contact> getContacts(int... ids) {
-        return null;
+        Set<Contact> newContactSet = new HashSet<Contact>();
+        
+        for (int id : ids) {
+            for (Contact c : contactList) {
+                if (c.getId() == id) {
+                    newContactSet.add(c);
+                }
+                else {
+                    throw new IllegalArgumentException("ID does not correspond to a real contact.");
+                }
+            }
+        }
+        
+        return newContactSet;
     }
     
+    /**
+    * Returns a list with the contacts whose name contains that string.
+    *
+    * @param name the string to search for
+    * @return a list with the contacts whose name contains that string.
+    * @throws NullPointerException if the parameter is null
+    */
     public Set<Contact> getContacts(String name) {
-        return null;
+        Set<Contact> newContactSet = new HashSet<Contact>();
+        
+        
+        
+        return newContactSet;
     }
     
     /**
