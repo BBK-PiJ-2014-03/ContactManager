@@ -118,6 +118,11 @@ public class ContactManagerTest {
     }
     
     @Test
+    public void testGetPastMeetingListContact() {
+        cm.getPastMeetingList(c1);
+    }
+    
+    @Test
     public void testFlush() {
         cm.flush();
     }
