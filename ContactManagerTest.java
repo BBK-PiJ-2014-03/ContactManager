@@ -108,11 +108,14 @@ public class ContactManagerTest {
     }
     
     @Test
-    public void testGetFutureMeetingList() {
+    public void testGetFutureMeetingListContact() {
         cm.getFutureMeetingList(c1);
     }
     
-    
+    @Test
+    public void testGetFutureMeetingListCalendar() {
+        cm.getFutureMeetingList(pastDate);
+    }
     
     @Test
     public void testFlush() {
