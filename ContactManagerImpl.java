@@ -236,7 +236,27 @@ public class ContactManagerImpl implements ContactManager {
     * @return the list of meetings
     */
     public List<Meeting> getFutureMeetingList(Calendar date) {
-        return null;
+        List<Meeting> newMeetingList = new ArrayList<Meeting>();
+        
+        if (date.before(Calendar.getInstance())) {
+            for (Meeting m : pastMeetingList) {
+                if (m.getDate().get(Calendar.YEAR) == date.get(Calendar.YEAR) &&
+                    m.getDate().get(Calendar.MONTH) == date.get(Calendar.MONTH) &&
+                    m.getDate().get(Calendar.DAY_OF_WEEK) == date.get(Calendar.DAY_OF_WEEK)) {
+                        newMeetingList.add(m);
+                }
+            }
+        }
+        else {
+            for (Meeting m : meetingList) {
+                if (m.getDate().get(Calendar.YEAR) == date.get(Calendar.YEAR) &&
+                    m.getDate().get(Calendar.MONTH) == date.get(Calendar.MONTH) &&
+                    m.getDate().get(Calendar.DAY_OF_WEEK) == date.get(Calendar.DAY_OF_WEEK)) {
+                        newMeetingList.add(m);
+                }
+            }
+        }
+        return newMeetingList;
     }
     
     public List<PastMeeting> getPastMeetingList(Contact contact) {
