@@ -1,7 +1,9 @@
 import java.util.Calendar;
 import java.util.List;
+import java.util.ArrayList;
 import java.util.Set;
 import java.util.HashSet;
+import java.util.Collections;
 import org.junit.*;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -10,7 +12,7 @@ import static org.junit.Assert.*;
 
 public class ContactManagerTest {
     
-    ContactManager cm;
+    ContactManagerImpl cm;
     Contact c1;
     Contact c2;
     Contact c3;
@@ -23,24 +25,22 @@ public class ContactManagerTest {
     public void buildContactManager() {
         cm = new ContactManagerImpl();
         
-        c1 = new ContactImpl("Bertram Wooster");
-        c2 = new ContactImpl("Reginald Jeeves");
-        c3 = new ContactImpl("Jim Smith");
-        
-        contactSet = new HashSet<Contact>();
-        contactSet.add(c1);
-        contactSet.add(c2);
-        contactSet.add(c3);
-        
         pastDate = new GregorianCalendar(2014, 3, 4);
         futureDate = new GregorianCalendar(2016, 2, 6);
         
-        cm.addNewPastMeeting(contactSet, pastDate, "");
-        cm.addNewPastMeeting(contactSet, pastDate, "Past Meeting 2");
-        cm.addNewPastMeeting(contactSet, pastDate, "Past Meeting 3");
+        cm.addNewContact("Bertram Wooster", "Gentleman");
+        cm.addNewContact("Reginald Jeeves", "Gentleman's Gentleman");
         
-        cm.addFutureMeeting(contactSet, futureDate);
     }
+     
+    @Test
+    public void testContactList() {
+        List<Contact> newList = (ArrayList<Contact>)cm.contactList;
+        for (Contact c : newList) {
+            System.out.println(c);
+        }
+    }   
+    
     
     @After
     public void cleanContactManager() {
@@ -73,10 +73,10 @@ public class ContactManagerTest {
         assertTrue(pastDate.before(GregorianCalendar.getInstance()));
     }
     
-    @Test
+   /*  @Test
     public void testAddNewPastMeeting() {
         cm.addNewPastMeeting(contactSet, pastDate, "This is a past meeting");
-    }
+    } */
     
     /* @Test
     public void testAddMeetingNotes() {
@@ -89,18 +89,18 @@ public class ContactManagerTest {
         assertEquals(cm.addFutureMeeting(contactSet, futureDate), cm.getFutureMeeting(0).getId());
     } */
         
-    @Test
+    /* @Test
     public void testGetPastMeeting() {
         assertEquals(cm.getPastMeeting(0).getId(), 0);
         assertEquals(cm.getPastMeeting(1).getId(), 1);
-    }
+    } */
     
     /* @Test
     public void testGetFutureMeeting() {
         assertEquals(cm.getFutureMeeting(3).getId(), 3);
     } */
     
-    @Test
+    /* @Test
     public void testGetMeeting() {
         assertEquals(cm.getMeeting(0).getId(), 0);
         assertEquals(cm.getMeeting(1).getId(), 1);
@@ -120,12 +120,30 @@ public class ContactManagerTest {
     @Test
     public void testGetPastMeetingListContact() {
         cm.getPastMeetingList(c1);
-    }
+    } */
     
-    @Test
-    public void testGetContacts() {
-        System.out.println(cm.getContacts(1,2));
-    }
+    /* @Test
+    public void testGetContactsInt() {
+        // System.out.println(cm.getContacts(0));
+        cm.addNewContact("Bertram Wooster", "Gentleman");
+        List<Contact> newList = (ArrayList<Contact>)cm.contactList;
+        for (Contact c : newList) {
+            System.out.println(c);
+        }
+    } */
+    
+   /*  @Test
+    public void testGetContactsString() {
+        cm.addNewContact("Bertram Wooster", "Gentleman");
+        
+        Set<Contact> newSet = cm.getContacts("Bertram Wooster");
+        
+        List<Contact> newList = Collections.list(Collections.enumeration(newSet));
+        
+        for (Contact c : newList) {
+            System.out.println(c);
+        }
+    } */
     
     @Test
     public void testFlush() {
