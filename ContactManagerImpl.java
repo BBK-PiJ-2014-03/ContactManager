@@ -80,21 +80,6 @@ public class ContactManagerImpl implements ContactManager {
         }
             
     }
-    /**
-    *
-    *   private method for updating the meeting lists
-    *   used on construction of a ContactManagerImpl object to put meetings that have already happened
-    *   into the pastMeetingList.
-    *
-    */
-    /* private void updateMeetingLists() {
-        for (Meeting m : meetingList) {
-            if (m.getDate().before(GregorianCalendar.getInstance())) {
-                this.addNewPastMeeting(m.getContacts(), m.getDate(),
-                meetingList.remove(m);
-            }
-        }
-    } */
     
     /**
     * Add a new meeting to be held in the future.
