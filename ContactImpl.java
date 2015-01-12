@@ -132,4 +132,26 @@ public class ContactImpl implements Contact,
     public static int getIDCounter() {
         return (Integer) IDCounter.get();
     }
+    
+    /**
+    *
+    *   override of equals() compares the current objects IDNUM with the
+    *   parameter Contact IDNUM.
+    *
+    */
+    @Override
+    public boolean equals(Object contact) {
+        if (contact instanceof Contact) {
+            Contact newContact = (ContactImpl) contact;
+            if (newContact.getId() == this.getId()) {
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
+        else {
+            return false;
+        }
+    }
 }
