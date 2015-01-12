@@ -433,8 +433,17 @@ public class ContactManagerImpl implements ContactManager {
     * @throws NullPointerException if the parameter is null
     */
     public Set<Contact> getContacts(String name) {
+        if (name == null) {
+            throw new NullPointerException("Name parameter is null.");
+        }
+        
         Set<Contact> newContactSet = new HashSet<Contact>();
         
+        for (Contact c : contactList) {
+            if (c.getName().equals(name)) {
+                newContactSet.add(c);
+            }
+        }
         
         
         return newContactSet;
